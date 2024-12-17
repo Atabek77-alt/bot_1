@@ -19,8 +19,8 @@ async def main():
     # await add_genre()
     # await add_url()
     # await add_actors()
-    # await add_director()
-    # await add_movie()
+    # await add_directors()
+    # await add_movies()
     # await add_series()
     
     bot = Bot(token=TOKEN)

@@ -29,7 +29,7 @@ async def get_genre_kb():
     kb = InlineKeyboardBuilder()
     genre = await all_genre()
     for gen in genre:
-        kb.add(InlineKeyboardButton(text=gen.name, callback_data=f'gen_{gen.id}'))
+        kb.add(InlineKeyboardButton(text=gen.name, callback_data=f'genre_{gen.id}'))
     return kb.adjust(2).as_markup()
 
 async def get_actors_kb():
@@ -39,6 +39,13 @@ async def get_actors_kb():
         kb.add(InlineKeyboardButton(text=f'{actor.first_name} {actor.last_name}', callback_data=f'actor_{actor.id}'))
     return kb.adjust(2).as_markup()
 
+async def get_actors_kb():
+    kb = InlineKeyboardBuilder()
+    actors = await all_actor()
+    for actor in actors:
+        kb.add(InlineKeyboardButton(text=f'{actor.first_name} {actor.last_name}', callback_data=f'actors_{actor.id}'))
+    return kb.adjust(2).as_markup()
+
 async def get_directors_kb():
     kb = InlineKeyboardBuilder()
     directors = await all_director()
@@ -46,13 +53,42 @@ async def get_directors_kb():
         kb.add(InlineKeyboardButton(text=f'{director.first_name} {director.last_name} ', callback_data=f'director_{director.id}'))
     return kb.adjust(2).as_markup()
 
+async def get_directors_kb():
+    kb = InlineKeyboardBuilder()
+    directors = await all_director()
+    for director in directors:
+        kb.add(InlineKeyboardButton(text=f'{director.first_name} {director.last_name} ', callback_data=f'directors_{director.id}'))
+    return kb.adjust(2).as_markup()
+
+async def get_movies_by_genre_kb(genre_id):
+    kb = InlineKeyboardBuilder()
+    movies = await get_movies_by_genre(genre_id)
+    for movie in movies:
+        kb.add(InlineKeyboardButton(text=movie.title,
+            callback_data=f"movie_{movie.id}"))
+
+    return kb.adjust(2).as_markup()
+
+async def get_movies_by_actor_kb(actor_id):
+    kb = InlineKeyboardBuilder()
+    movies = await get_movies_by_actor(actor_id)
+    for movie in movies:
+        kb.add(InlineKeyboardButton(text=movie.title,
+            callback_data=f"actor_{movie.id}"))
+
+    return kb.adjust(2).as_markup()
+
+async def get_movies_by_director_kb(actor_id):
+    kb = InlineKeyboardBuilder()
+    movies = await get_movies_by_director(actor_id)
+    for movie in movies:
+        kb.add(InlineKeyboardButton(text=movie.title,
+            callback_data=f"director_{movie.id}"))
+
+    return kb.adjust(2).as_markup()
 
 
-
-# ikb = InlineKeyboardMarkup(inline_keyboard=[
-#     [InlineKeyboardButton(text='Форест Гамп', callback_data='hello')],
-#     [InlineKeyboardButton(text='Бойцовский клуб', callback_data='bye' )]
-# ])
+    
 
 
 
