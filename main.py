@@ -6,8 +6,11 @@ from config import TOKEN
 from commands.command import command_router
 from databases.models import create_tables
 from databases.qyerysets import *
+from commands.admin import *
+from scrip.parsing import *
 
 async def main():
+    # await add_movies()
     # await add_movie_actors()
     # await add_movie_directors()
     # await add_movie_genre()
@@ -25,7 +28,7 @@ async def main():
     
     bot = Bot(token=TOKEN)
     dp = Dispatcher()
-    dp.include_router(command_router)
+    dp.include_routers(command_router, admin_router)
     await dp.start_polling(bot)
 
 if __name__ == "__main__":
